@@ -1,0 +1,278 @@
+// @import "grid";
+
+$bg-color: #6ab04c; // Couleur de fond (vert clair)
+$snake-color: #006400; // Vert foncé pour le serpent
+$grid-size: 20px;
+$game-size: 400px;
+$border-color: #27ae60; // Bordure verte autour du plateau
+$light-cell-color: #b8e994; // Vert clair pour les cases claires
+$dark-cell-color: #78e08f; // Vert légèrement plus foncé pour les cases foncées
+$apple-color: #e74c3c; // Couleur rouge pour les pommes
+$text-color: #ffffff;
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-color: $bg-color;
+  margin: 0;
+  color: $text-color;
+}
+
+.game-header {
+  text-align: center;
+  margin-bottom: 10px;
+  h1 {
+    margin: 0;
+    font-size: 2rem;
+  }
+  p {
+    margin: 5px 0 0;
+    font-size: 1.2rem;
+  }
+}
+
+.game-area {
+  position: relative;
+  width: $game-size;
+  height: $game-size;
+  display: grid;
+  grid-template-columns: repeat(20, $grid-size);
+  grid-template-rows: repeat(20, $grid-size);
+  box-shadow: 0 0 15px black;
+  border: 10px solid $border-color; // Bordure plus épaisse autour du plateau
+  background-color: $light-cell-color;
+}
+
+.grid-cell {
+  width: $grid-size;
+  height: $grid-size;
+  background-color: $light-cell-color;
+}
+
+.grid-cell {
+  background-color: $dark-cell-color;
+}
+
+.snake-segment {
+  position: absolute;
+  width: $grid-size;
+  height: $grid-size;
+  background-color: $snake-color;
+  border-radius: 5px; // Coins légèrement arrondis pour un effet plus doux
+  z-index: 10; // Assure que le serpent est au-dessus du damier
+}
+
+.apple {
+  position: absolute;
+  width: 24px; /* Ajustez la taille si nécessaire */
+  height: 24px; /* Ajustez la taille si nécessaire */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32"><circle cx="16" cy="18" r="12" fill="%23e74c3c"/><path fill="%232ecc71" d="M16 2c-2 0-4 2-4 4s2 4 4 4 4-2 4-4-2-4-4-4z"/><path fill="%2327ae60" d="M18 0c-1 0-2 1-2 2s1 2 2 2 2-1 2-2-1-2-2-2z"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 5;
+}
+
+.grid-cell:nth-child(2),
+.grid-cell:nth-child(4),
+.grid-cell:nth-child(6),
+.grid-cell:nth-child(8),
+.grid-cell:nth-child(10),
+.grid-cell:nth-child(12),
+.grid-cell:nth-child(14),
+.grid-cell:nth-child(16),
+.grid-cell:nth-child(18),
+.grid-cell:nth-child(20),
+.grid-cell:nth-child(21),
+.grid-cell:nth-child(23),
+.grid-cell:nth-child(25),
+.grid-cell:nth-child(27),
+.grid-cell:nth-child(29),
+.grid-cell:nth-child(31),
+.grid-cell:nth-child(33),
+.grid-cell:nth-child(35),
+.grid-cell:nth-child(37),
+.grid-cell:nth-child(39),
+.grid-cell:nth-child(42),
+.grid-cell:nth-child(44),
+.grid-cell:nth-child(46),
+.grid-cell:nth-child(48),
+.grid-cell:nth-child(50),
+.grid-cell:nth-child(52),
+.grid-cell:nth-child(54),
+.grid-cell:nth-child(56),
+.grid-cell:nth-child(58),
+.grid-cell:nth-child(60),
+.grid-cell:nth-child(61),
+.grid-cell:nth-child(63),
+.grid-cell:nth-child(65),
+.grid-cell:nth-child(67),
+.grid-cell:nth-child(69),
+.grid-cell:nth-child(71),
+.grid-cell:nth-child(73),
+.grid-cell:nth-child(75),
+.grid-cell:nth-child(77),
+.grid-cell:nth-child(79),
+.grid-cell:nth-child(82),
+.grid-cell:nth-child(84),
+.grid-cell:nth-child(86),
+.grid-cell:nth-child(88),
+.grid-cell:nth-child(90),
+.grid-cell:nth-child(92),
+.grid-cell:nth-child(94),
+.grid-cell:nth-child(96),
+.grid-cell:nth-child(98),
+.grid-cell:nth-child(100),
+.grid-cell:nth-child(101),
+.grid-cell:nth-child(103),
+.grid-cell:nth-child(105),
+.grid-cell:nth-child(107),
+.grid-cell:nth-child(109),
+.grid-cell:nth-child(111),
+.grid-cell:nth-child(113),
+.grid-cell:nth-child(115),
+.grid-cell:nth-child(117),
+.grid-cell:nth-child(119),
+.grid-cell:nth-child(122),
+.grid-cell:nth-child(124),
+.grid-cell:nth-child(126),
+.grid-cell:nth-child(128),
+.grid-cell:nth-child(130),
+.grid-cell:nth-child(132),
+.grid-cell:nth-child(134),
+.grid-cell:nth-child(136),
+.grid-cell:nth-child(138),
+.grid-cell:nth-child(140),
+.grid-cell:nth-child(141),
+.grid-cell:nth-child(143),
+.grid-cell:nth-child(145),
+.grid-cell:nth-child(147),
+.grid-cell:nth-child(149),
+.grid-cell:nth-child(151),
+.grid-cell:nth-child(153),
+.grid-cell:nth-child(155),
+.grid-cell:nth-child(157),
+.grid-cell:nth-child(159),
+.grid-cell:nth-child(162),
+.grid-cell:nth-child(164),
+.grid-cell:nth-child(166),
+.grid-cell:nth-child(168),
+.grid-cell:nth-child(170),
+.grid-cell:nth-child(172),
+.grid-cell:nth-child(174),
+.grid-cell:nth-child(176),
+.grid-cell:nth-child(178),
+.grid-cell:nth-child(180),
+.grid-cell:nth-child(181),
+.grid-cell:nth-child(183),
+.grid-cell:nth-child(185),
+.grid-cell:nth-child(187),
+.grid-cell:nth-child(189),
+.grid-cell:nth-child(191),
+.grid-cell:nth-child(193),
+.grid-cell:nth-child(195),
+.grid-cell:nth-child(197),
+.grid-cell:nth-child(199),
+.grid-cell:nth-child(202),
+.grid-cell:nth-child(204),
+.grid-cell:nth-child(206),
+.grid-cell:nth-child(208),
+.grid-cell:nth-child(210),
+.grid-cell:nth-child(212),
+.grid-cell:nth-child(214),
+.grid-cell:nth-child(216),
+.grid-cell:nth-child(218),
+.grid-cell:nth-child(220),
+.grid-cell:nth-child(221),
+.grid-cell:nth-child(223),
+.grid-cell:nth-child(225),
+.grid-cell:nth-child(227),
+.grid-cell:nth-child(229),
+.grid-cell:nth-child(231),
+.grid-cell:nth-child(233),
+.grid-cell:nth-child(235),
+.grid-cell:nth-child(237),
+.grid-cell:nth-child(239),
+.grid-cell:nth-child(242),
+.grid-cell:nth-child(244),
+.grid-cell:nth-child(246),
+.grid-cell:nth-child(248),
+.grid-cell:nth-child(250),
+.grid-cell:nth-child(252),
+.grid-cell:nth-child(254),
+.grid-cell:nth-child(256),
+.grid-cell:nth-child(258),
+.grid-cell:nth-child(260),
+.grid-cell:nth-child(261),
+.grid-cell:nth-child(263),
+.grid-cell:nth-child(265),
+.grid-cell:nth-child(267),
+.grid-cell:nth-child(269),
+.grid-cell:nth-child(271),
+.grid-cell:nth-child(273),
+.grid-cell:nth-child(275),
+.grid-cell:nth-child(277),
+.grid-cell:nth-child(279),
+.grid-cell:nth-child(282),
+.grid-cell:nth-child(284),
+.grid-cell:nth-child(286),
+.grid-cell:nth-child(288),
+.grid-cell:nth-child(290),
+.grid-cell:nth-child(292),
+.grid-cell:nth-child(294),
+.grid-cell:nth-child(296),
+.grid-cell:nth-child(298),
+.grid-cell:nth-child(300),
+.grid-cell:nth-child(301),
+.grid-cell:nth-child(303),
+.grid-cell:nth-child(305),
+.grid-cell:nth-child(307),
+.grid-cell:nth-child(309),
+.grid-cell:nth-child(311),
+.grid-cell:nth-child(313),
+.grid-cell:nth-child(315),
+.grid-cell:nth-child(317),
+.grid-cell:nth-child(319),
+.grid-cell:nth-child(322),
+.grid-cell:nth-child(324),
+.grid-cell:nth-child(326),
+.grid-cell:nth-child(328),
+.grid-cell:nth-child(330),
+.grid-cell:nth-child(332),
+.grid-cell:nth-child(334),
+.grid-cell:nth-child(336),
+.grid-cell:nth-child(338),
+.grid-cell:nth-child(340),
+.grid-cell:nth-child(341),
+.grid-cell:nth-child(343),
+.grid-cell:nth-child(345),
+.grid-cell:nth-child(347),
+.grid-cell:nth-child(349),
+.grid-cell:nth-child(351),
+.grid-cell:nth-child(353),
+.grid-cell:nth-child(355),
+.grid-cell:nth-child(357),
+.grid-cell:nth-child(359),
+.grid-cell:nth-child(362),
+.grid-cell:nth-child(364),
+.grid-cell:nth-child(366),
+.grid-cell:nth-child(368),
+.grid-cell:nth-child(370),
+.grid-cell:nth-child(372),
+.grid-cell:nth-child(374),
+.grid-cell:nth-child(376),
+.grid-cell:nth-child(378),
+.grid-cell:nth-child(380),
+.grid-cell:nth-child(381),
+.grid-cell:nth-child(383),
+.grid-cell:nth-child(385),
+.grid-cell:nth-child(387),
+.grid-cell:nth-child(389),
+.grid-cell:nth-child(391),
+.grid-cell:nth-child(393),
+.grid-cell:nth-child(395),
+.grid-cell:nth-child(397),
+.grid-cell:nth-child(399) {
+  background-color: $light-cell-color;
+}
