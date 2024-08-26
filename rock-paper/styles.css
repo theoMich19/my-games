@@ -1,0 +1,101 @@
+body {
+  margin: 0;
+  font-family: "Arial", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.container {
+  text-align: center;
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  transition: background-color 0.5s ease;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #f1c40f;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.score-board {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.badge {
+  width: 33%;
+  font-size: 18px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #f39c12;
+  color: #1e1e1e;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.score {
+  width: 33%;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.result {
+  margin-bottom: 20px;
+  height: 40px;
+}
+
+#result-message {
+  font-size: 20px;
+  font-weight: bold;
+  transition: color 0.5s ease, transform 0.3s ease;
+}
+
+.choices {
+  display: flex;
+  justify-content: center;
+}
+
+.choice {
+  margin: 0 15px;
+  cursor: pointer;
+}
+
+.choice img {
+  width: 100px;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.choice img:hover {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 10px #f1c40f);
+}
+
+/* Result Color Classes */
+.win, .lose, .draw {
+  -moz-columns: white;
+       columns: white;
+}
+
+/* Container Color Animation */
+.container.win {
+  background-color: #2ecc71;
+  box-shadow: 0 0 30px #27ae60;
+}
+
+.container.lose {
+  background-color: #e74c3c;
+  box-shadow: 0 0 30px #c0392b;
+}
+
+.container.draw {
+  background-color: #f39c12;
+  box-shadow: 0 0 30px #e67e22;
+}/*# sourceMappingURL=styles.css.map */
